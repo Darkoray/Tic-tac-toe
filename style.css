@@ -1,9 +1,9 @@
+/* #region Global reset and root variables */
 :root {
   --line-size: 6px;
   --circle-color: #ffb347;
   --close-color: #9b47e0;
   --win-color: #e94e77;
-  --win-color--hover: rgba(233, 78, 119, 0.4);
   --bg-color: #121212;
   --ui-color: #e0e0e0;
   --hover-color: #303030;
@@ -28,6 +28,7 @@ body {
   color: var(--ui-color);
   background-color: var(--bg-color);
 
+  /* To align and justify contents */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,22 +37,21 @@ body {
   justify-content: center;
 }
 
+/* Background image */
 body::before {
   content: '';
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background-image: url(bg.gif);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  mix-blend-mode: lighten;
-  opacity: 0.12;
-  filter: blur(2px);
+  background-image: url(bg-1.png);
+  opacity: 0.15;
+  background-size: 80%;
+  background-repeat: repeat;
   z-index: -1;
 }
 
+/* To align and justify contents */
 main {
   display: flex;
   justify-content: center;
@@ -64,20 +64,24 @@ header {
   flex-direction: column;
   align-items: center;
 }
+/* #endregion */
 
+/* #region Heading and texts */
+
+/* Game title and animation*/
 @keyframes headerAnimation {
   0%,
   100% {
-    text-shadow: 5px 5px 0px var(--win-color),
-      10px 10px 0px var(--close-color), 15px 15px 0px var(--circle-color);
+    text-shadow: 0.2vw 0.2vw 0 var(--win-color),
+      0.6vw 0.6vw 0 var(--close-color), 1vw 1vw 0 var(--circle-color);
   }
   33% {
-    text-shadow: 5px 5px 0px var(--circle-color),
-      10px 10px 0px var(--win-color), 15px 15px 0px var(--close-color);
+    text-shadow: 0.2vw 0.2vw 0 var(--circle-color),
+      0.6vw 0.6vw 0 var(--win-color), 1vw 1vw 0 var(--close-color);
   }
   66% {
-    text-shadow: 5px 5px 0px var(--close-color),
-      10px 10px 0px var(--circle-color), 15px 15px 0px var(--win-color);
+    text-shadow: 0.2vw 0.2vw 0 var(--close-color),
+      0.6vw 0.6vw 0 var(--circle-color), 1vw 1vw 0 var(--win-color);
   }
 }
 
@@ -85,57 +89,31 @@ h1 {
   font-size: clamp(2.75rem, calc(3.5vw + 1.5rem), 4.4rem); /* 44px */
   color: transparent;
   letter-spacing: 1rem;
-  margin-block: clamp(1.5rem, 2vw, 2.4rem); /* 24px */
-  animation: headerAnimation 2s ease-in-out infinite;
+  margin-block: clamp(2rem, 2vw, 2.4rem); /* 24px */
+  animation: headerAnimation 2.2s ease-in-out infinite;
 }
 
+/* Displays current instruction or information'*/
 .instructions {
   font-size: clamp(1rem, calc(1vw + 0.5rem), 1.6rem); /* 16px */
   letter-spacing: 2px;
-}
-
-@keyframes circleAnimation {
-  0%,
-  100% {
-    text-shadow: 0 0 1px var(--circle-color), 0 0 3px var(--circle-color),
-      0 0 6px var(--circle-color);
-    transform: scale(1);
-    filter: contrast(200%);
-  }
-  50% {
-    text-shadow: 0 0 4px var(--circle-color), 0 0 8px var(--circle-color),
-      0 0 16px var(--circle-color), 0 0 24px var(--circle-color);
-    transform: scale(1.05);
-    filter: contrast(100%);
-  }
-}
-
-@keyframes closeAnimation {
-  0%,
-  100% {
-    text-shadow: 0 0 1px var(--close-color), 0 0 3px var(--close-color),
-      0 0 6px var(--close-color);
-    transform: scale(1);
-    filter: contrast(200%);
-  }
-  50% {
-    text-shadow: 0 0 4px var(--close-color), 0 0 8px var(--close-color),
-      0 0 16px var(--close-color), 0 0 24px var(--close-color);
-    transform: scale(1.05);
-    filter: contrast(100%);
-  }
+  transition: all 0.3s ease-in-out;
 }
 
 .winner--circle {
-  font-weight: 900;
-  animation: circleAnimation 1.8s infinite ease-in-out;
+  font-weight: 600;
+  text-shadow: 2px 2px 0 var(--circle-color);
+  transform: scale(1.05);
 }
 
 .winner--close {
-  font-weight: 900;
-  animation: closeAnimation 1.8s infinite ease-in-out;
+  font-weight: 600;
+  text-shadow: 2px 2px 0 var(--close-color);
 }
 
+/* #endregion */
+
+/* #region Btn styling */
 @keyframes btnHover {
   0%,
   100% {
@@ -149,99 +127,133 @@ h1 {
 }
 
 .btn {
-  font-size: clamp(1rem, calc(1vw + 0.5rem), 1.6rem); /* 16px */
-  padding: clamp(0.75rem, 1.2vw, 1.2rem) clamp(1.5rem, 2vw, 2.4rem); /* 12px 24px */
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  font-weight: 600;
+  margin-block: 1rem;
+  padding: 1.2rem 2.4rem;
   border-radius: 50px;
   background-color: var(--ui-color);
   color: var(--win-color);
   cursor: pointer;
   border: none;
-  transition: all 0.2s;
-  transform: translateY(-4px);
-  box-shadow: 0 2px 10px var(--win-color--hover);
+  transition: transform 0.2s ease-in-out, box-shadow 0.35s ease;
+
+  transform: scale(1) translate(-8px, 0);
+  box-shadow: 2px 2px 0 var(--win-color);
+
+  &:hover {
+    transform: scale(1.08) translate(-16px, -8px);
+    box-shadow: 4px 4px 0 var(--circle-color), 8px 8px 0 var(--close-color);
+  }
 
   &:active {
-    transform: translateY(0);
-    box-shadow: none;
+    transform: scale(1) translate(-8px, 0);
+    box-shadow: 2px 2px 0 var(--win-color);
   }
 }
 
+/* Changes to this style if the game is over */
 .btn--style {
-  animation: btnHover 1.5s infinite ease-in-out;
+  transform: scale(1.08) translate(-16px, -8px);
+  box-shadow: 4px 4px 0 var(--circle-color), 8px 8px 0 var(--close-color);
+
+  &:hover {
+    transform: scale(1.08) translate(-16px, -8px);
+    box-shadow: 4px 4px 0 var(--circle-color), 8px 8px 0 var(--close-color);
+  }
+
+  &:active {
+    transform: scale(1) translate(-8px, 0);
+    box-shadow: 2px 2px 0 var(--win-color);
+  }
+}
+
+@property --shape-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e94e77;
+}
+
+/* Shapes styling */
+.material-icons-outlined {
+  font-size: max(60px, 4vw) !important;
+}
+
+@keyframes shapeGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 1px var(--shape-color), 0 0 3px var(--shape-color),
+      0 0 5px var(--shape-color);
+    filter: contrast(100%) brightness(102%);
+  }
+  30% {
+    text-shadow: 0 0 2px var(--shape-color), 0 0 3px var(--shape-color),
+      0 0 5px var(--shape-color), 0 0 7px var(--shape-color);
+    filter: contrast(105%) brightness(100%);
+  }
+}
+
+.circle {
+  --shape-color: var(--circle-color);
+  animation: shapeGlow 2s infinite ease-in-out;
+}
+
+.close {
+  --shape-color: var(--close-color);
+  scale: 1.2;
+  animation: shapeGlow 2s infinite ease-in-out;
+}
+
+/* #endregion */
+
+/* #region Board and shapes */
+
+/* Winning combo display */
+@keyframes winnerBar {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 30%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.winner-bar {
+  position: absolute;
+  background-color: var(--ui-color);
+
+  width: 10px;
+  z-index: 100;
+  border-radius: 50px;
+  animation: winnerBar 0.2s 0.1s ease forwards;
+}
+
+.winner-bar--circle {
+  box-shadow: 0 0 2px var(--circle-color), 0 0 6px var(--circle-color),
+    0 0 10px var(--circle-color);
+}
+
+.winner-bar--close {
+  box-shadow: 0 0 2px var(--close-color), 0 0 6px var(--close-color),
+    0 0 10px var(--close-color);
 }
 
 .hidden {
   display: none;
 }
 
-@keyframes circle {
-  0%,
-  100% {
-    text-shadow: 0 0 2px var(--circle-color), 0 0 6px var(--circle-color),
-      0 0 10px var(--circle-color);
-    filter: contrast(100%) brightness(110%);
-  }
-  50% {
-    text-shadow: 0 0 3px var(--circle-color), 0 0 8px var(--circle-color),
-      0 0 12px var(--circle-color), 0 0 20px var(--circle-color);
-    filter: contrast(110%) brightness(100%);
-  }
-}
-
-@keyframes close {
-  0%,
-  100% {
-    text-shadow: 0 0 2px var(--close-color), 0 0 6px var(--close-color),
-      0 0 10px var(--close-color);
-    filter: contrast(100%) brightness(110%);
-  }
-  50% {
-    text-shadow: 0 0 3px var(--close-color), 0 0 8px var(--close-color),
-      0 0 12px var(--close-color), 0 0 20px var(--close-color);
-    filter: contrast(110%) brightness(100%);
-  }
-}
-
-.circle {
-  animation: circle 2s infinite ease-in-out;
-}
-
-.close {
-  scale: 1.2;
-  animation: close 2s infinite ease-in-out;
-}
-
-.winner-bar {
-  position: absolute;
-  background-color: var(--ui-color);
-  box-shadow: 0 0 2px var(--win-color), 0 0 6px var(--win-color),
-    0 0 10px var(--win-color);
-  height: 110%;
-  width: 10px;
-  z-index: 100;
-  border-radius: 50px;
-}
-
-.winner-bar--shape {
-  /* rotate: 45deg;
-
-  rotate: -45deg;
-
-  rotate: 0deg;
-
-  rotate: 0deg;
-  right: 15%;
-
-  rotate: 0deg;
-  left: 15%;
-
-  rotate: 90deg;
-
-  rotate: 90deg;
-  bottom: 30%;
-
-  rotate: 90deg;
-  top: 30%; */
+/* Cells */
+.board-top {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: var(--line-size);
+  position: relative;
+  width: max(250px, 20vw);
+  height: max(250px, 20vw);
 }
 
 .cell {
@@ -253,23 +265,11 @@ h1 {
 
 .cell-legal:hover {
   cursor: pointer;
-  scale: 0.8;
-  opacity: 0.6;
+  scale: 0.95;
+  opacity: 0.4;
 }
 
-.material-icons-outlined {
-  font-size: max(60px, 4vw) !important;
-}
-
-.board-top {
-  display: grid;
-  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  gap: var(--line-size);
-  position: relative;
-  width: max(250px, 20vw);
-  height: max(250px, 20vw);
-}
-
+/* Board bars */
 .board {
   position: absolute;
   width: 100%;
@@ -286,7 +286,7 @@ h1 {
 
 .vertical-line {
   width: var(--line-size);
-  height: 101%;
+  height: 100%;
 }
 
 .vertical-line-1 {
@@ -311,3 +311,5 @@ h1 {
   inset: 0;
   top: 66.66666666666667%;
 }
+
+/* #endregion */
