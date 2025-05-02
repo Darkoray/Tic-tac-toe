@@ -1,4 +1,4 @@
-# Tic-Tac-Toe
+# Tic-Tac-Toe [![wakatime](https://wakatime.com/badge/github/Darkoray/Tic-tac-toe.svg)](https://wakatime.com/badge/github/Darkoray/Tic-tac-toe)
 
 I made this game with my recently learnt basic of Javascript DOM Manipulation. Have fun!
 
