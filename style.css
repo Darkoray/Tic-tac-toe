@@ -52,6 +52,19 @@ body::before {
   z-index: -1;
 }
 
+::selection {
+  background-color: transparent;
+  color: transparent;
+}
+
+:focus-visible {
+  outline: none;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* To align and justify contents */
 main {
   display: flex;
